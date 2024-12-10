@@ -1,5 +1,6 @@
 import argparse
 import re
+import sys
 
 
 def get_filename() -> str:
@@ -20,8 +21,12 @@ def read_file(filename: str) -> str:
     :param filename: The file name
     :return: The file contents
     """
-    with open(filename, "r", encoding="utf-8") as file:
-        return file.read()
+    try:
+        with open(filename, "r", encoding="utf-8") as file:
+            return file.read()
+    except FileNotFoundError:
+        print (f"Файл {filename} не найден.")
+        sys.exit(1)
 
 
 def find_dates(text: str) -> list:
