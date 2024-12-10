@@ -1,7 +1,5 @@
 import argparse
 import re
-import sys
-
 
 def get_filename() -> str:
     """
@@ -21,12 +19,11 @@ def read_file(filename: str) -> str:
     :param filename: The file name
     :return: The file contents
     """
-    try:
+    if filename is not None:
         with open(filename, "r", encoding="utf-8") as file:
             return file.read()
-    except FileNotFoundError:
-        print (f"Файл {filename} не найден.")
-        sys.exit(1)
+    else:
+        raise FileNotFoundError("File not found")
 
 
 def find_dates(text: str) -> list:
@@ -51,10 +48,15 @@ def print_quantity(dates_list: list):
 
 
 def main():
-    filename = get_filename()
-    text = read_file(filename)
-    dates_list = find_dates(text)
-    print_quantity(dates_list)
+    try:
+        filename = get_filename()
+        text = read_file(filename)
+        dates_list = find_dates(text)
+        print_quantity(dates_list)
+    except FileNotFoundError as exc:
+        print("Error: ", exc)
+    except Exception as exc:
+        print("Error: ", exc)
 
 
 if __name__ == "__main__":
