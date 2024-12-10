@@ -1,5 +1,5 @@
-import re
 import argparse
+import re
 
 
 def get_filename() -> str:
