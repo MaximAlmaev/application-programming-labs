@@ -1,7 +1,5 @@
 import argparse
 import re
-import sys
-
 
 def get_filename() -> str:
     """
