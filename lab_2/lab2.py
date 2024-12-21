@@ -35,7 +35,6 @@ def main() -> None:
     """
     The main program.
     """
-    try:
     keyword, save_dir, annotation_file = parse()
 
     crawler = image_crawler.ImageCrawler(keyword, save_dir, 1000)
@@ -45,11 +44,6 @@ def main() -> None:
     iterator = image_iterator.ImageIterator(annotation_file)
     for image_path in iterator:
         print(image_path)
-
-    except FileNotFoundError as exc:
-        print("Error: ", exc)
-    except Exception as exc:
-        print("Error: ", exc)
 
 
 if __name__ == "__main__":
